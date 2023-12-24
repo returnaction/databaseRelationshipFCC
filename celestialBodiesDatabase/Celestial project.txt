@@ -1,0 +1,928 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+psql (16.1)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# psql --username=freecodecamp --dbname=postgreCelestial;
+postgres-# \l
+                                                                         List of databases
+      Name       |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | ICU Locale | ICU Rules |   Access privileges
+-----------------+----------+----------+-----------------+----------------------------+----------------------------+------------+-----------+-----------------------
+ dev             | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ mario_database  | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ postgres        | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ second_database | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ template0       | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           | =c/postgres          +
+                 |          |          |                 |                            |                            |            |           | postgres=CTc/postgres
+ template1       | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           | =c/postgres          +
+                 |          |          |                 |                            |                            |            |           | postgres=CTc/postgres
+(6 rows)
+
+
+postgres-# create database postgresCelestialBodyDatabase;
+ERROR:  syntax error at or near "psql"
+LINE 1: psql --username=freecodecamp --dbname=postgreCelestial;
+        ^
+postgres=# create database postgresCelestialBodyDatabase;
+CREATE DATABASE
+postgres=# \l
+                                                                                List of databases
+             Name              |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | ICU Locale | ICU Rules |   Access privileges
+-------------------------------+----------+----------+-----------------+----------------------------+----------------------------+------------+-----------+-----------------------
+ dev                           | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ mario_database                | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ postgres                      | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ postgrescelestialbodydatabase | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ second_database               | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ template0                     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           | =c/postgres          +
+                               |          |          |                 |                            |                            |            |           | postgres=CTc/postgres
+ template1                     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           | =c/postgres          +
+                               |          |          |                 |                            |
+                |            |           | postgres=CTc/postgres
+(7 rows)
+
+
+postgres=# \c postgrescelestialbodydatabase
+You are now connected to database "postgrescelestialbodydatabase" as user "postgres".
+postgrescelestialbodydatabase=# \l
+                                                                                List of databases
+             Name              |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | ICU Locale | ICU Rules |   Access privileges
+-------------------------------+----------+----------+-----------------+----------------------------+----------------------------+------------+-----------+-----------------------
+ dev                           | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ mario_database                | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ postgres                      | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ postgrescelestialbodydatabase | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ second_database               | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
+ template0                     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           | =c/postgres          +
+                               |          |          |                 |                            |
+                |            |           | postgres=CTc/postgres
+ template1                     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           | =c/postgres          +
+                               |          |          |                 |                            |
+                |            |           | postgres=CTc/postgres
+(7 rows)
+
+
+postgrescelestialbodydatabase=# \c postgres
+You are now connected to database "postgres" as user "postgres".
+postgres=# create database universe;
+CREATE DATABASE
+postgres=# \c universe
+You are now connected to database "universe" as user "postgres".
+universe=# create table galaxy(galaxy_id serial primary key);
+CREATE TABLE
+universe=# alter table galaxy add column name varchar(30);
+ALTER TABLE
+universe=# alter table galaxy add column speed int;
+ALTER TABLE
+universe=# alter table galaxy add column description text;
+ALTER TABLE
+universe=# \d galaxy
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ speed       | integer               |           |          |
+ description | text                  |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+
+
+universe=# alter table galaxy rename column speed to size_tons;
+ALTER TABLE
+universe=# \d galaxy;
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ size_tons   | integer               |           |          |
+ description | text                  |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+
+
+universe=# alter table galaxy add column populated boolean
+universe-# ;
+ALTER TABLE
+universe=# \d galaxy;
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ size_tons   | integer               |           |          |
+ description | text                  |           |          |
+ populated   | boolean               |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+
+
+universe=# CREATE TABLE start(star_id serial primary key, name varchar(30) not null, radius int, description text, color varchar(30), has_oxygen boolean, galaxy_id int constraint fk_galaxy foreign key(galaxy_id) references galaxy(galaxy_id));
+ERROR:  syntax error at or near "foreign"
+LINE 1: ...xygen boolean, galaxy_id int constraint fk_galaxy foreign ke...
+                                                             ^
+universe=# CREATE TABLE start(star_id serial primary key, name varchar(30) not null, radius int, description text, color varchar(30), has_oxygen boolean, galaxy_id int constraint fk_galaxy FOREIGN KEY(galaxy_id) references galaxy(galaxy_id));
+ERROR:  syntax error at or near "FOREIGN"
+LINE 1: ...xygen boolean, galaxy_id int constraint fk_galaxy FOREIGN KE...
+                                                             ^
+universe=# CREATE TABLE start(star_id serial primary key, name varchar(30) not null, radius int, description text, color varchar(30), has_oxygen boolean, galaxy_id int, constraint fk_galaxy FOREIGN KEY(galaxy_id) references galaxy(galaxy_id));
+CREATE TABLE
+universe=# \d start
+                                        Table "public.start"
+   Column    |         Type          | Collation | Nullable |                Default
+-------------+-----------------------+-----------+----------+----------------------------------------
+ star_id     | integer               |           | not null | nextval('start_star_id_seq'::regclass)
+ name        | character varying(30) |           | not null |
+ radius      | integer               |           |          |
+ description | text                  |           |          |
+ color       | character varying(30) |           |          |
+ has_oxygen  | boolean               |           |          |
+ galaxy_id   | integer               |           |          |
+Indexes:
+    "start_pkey" PRIMARY KEY, btree (star_id)
+Foreign-key constraints:
+    "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# alter table start rename table star;
+ERROR:  syntax error at or near "table"
+LINE 1: alter table start rename table star;
+                                 ^
+universe=# alter table start rename star;
+ERROR:  syntax error at or near ";"
+LINE 1: alter table start rename star;
+                                     ^
+universe=# alter table start rename to star;
+ALTER TABLE
+universe=# \d
+                  List of relations
+ Schema |         Name         |   Type   |  Owner
+--------+----------------------+----------+----------
+ public | galaxy               | table    | postgres
+ public | galaxy_galaxy_id_seq | sequence | postgres
+ public | star                 | table    | postgres
+ public | start_star_id_seq    | sequence | postgres
+(4 rows)
+
+
+universe=# \star
+invalid command \star
+Try \? for help.
+universe=# \d star
+                                         Table "public.star"
+   Column    |         Type          | Collation | Nullable |                Default
+-------------+-----------------------+-----------+----------+----------------------------------------
+ star_id     | integer               |           | not null | nextval('start_star_id_seq'::regclass)
+ name        | character varying(30) |           | not null |
+ radius      | integer               |           |          |
+ description | text                  |           |          |
+ color       | character varying(30) |           |          |
+ has_oxygen  | boolean               |           |          |
+ galaxy_id   | integer               |           |          |
+Indexes:
+    "start_pkey" PRIMARY KEY, btree (star_id)
+Foreign-key constraints:
+    "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# \d start
+Did not find any relation named "start".
+universe=# \d star
+                                         Table "public.star"
+   Column    |         Type          | Collation | Nullable |                Default
+-------------+-----------------------+-----------+----------+----------------------------------------
+ star_id     | integer               |           | not null | nextval('start_star_id_seq'::regclass)
+ name        | character varying(30) |           | not null |
+ radius      | integer               |           |          |
+ description | text                  |           |          |
+ color       | character varying(30) |           |          |
+ has_oxygen  | boolean               |           |          |
+ galaxy_id   | integer               |           |          |
+Indexes:
+    "start_pkey" PRIMARY KEY, btree (star_id)
+Foreign-key constraints:
+    "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# \d galaxy
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ size_tons   | integer               |           |          |
+ description | text                  |           |          |
+ populated   | boolean               |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+Referenced by:
+    TABLE "star" CONSTRAINT "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# create table planet(planet_id serial primary key, name varchar(30) not null, amount_of_people numeric, time_travel boolean default(0), star_id int, constraint fk_star foreign key(star_id) references star(star_id));
+ERROR:  column "time_travel" is of type boolean but default expression is of type integer
+HINT:  You will need to rewrite or cast the expression.
+universe=# create table planet(planet_id serial primary key, name varchar(30) not null, amount_of_people numeric, time_travel boolean default(false), star_id int, constraint fk_star foreign key(star_id) references star(star_id));
+CREATE TABLE
+universe=# \d planet
+                                            Table "public.planet"
+      Column      |         Type          | Collation | Nullable |                  Default
+------------------+-----------------------+-----------+----------+-------------------------------------------
+ planet_id        | integer               |           | not null | nextval('planet_planet_id_seq'::regclass)
+ name             | character varying(30) |           | not null |
+ amount_of_people | numeric               |           |          |
+ time_travel      | boolean               |           |          | false
+ star_id          | integer               |           |          |
+Indexes:
+    "planet_pkey" PRIMARY KEY, btree (planet_id)
+Foreign-key constraints:
+    "fk_star" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+
+universe=# create table moon(moon_id serial primary key, name varchar(30) not null, has_oxygen boolean, has_water boolean, planet_id, constraint fl_planet foreign key(planet_id) references planet(planet_id);
+universe(# );
+ERROR:  syntax error at or near ","
+LINE 1: ..., has_oxygen boolean, has_water boolean, planet_id, constrai...
+                                                             ^
+universe=# create table moon(moon_id serial primary key, name varchar(30) not null, has_oxygen boolean, has_water boolean, planet_id, constraint fl_planet foreign key(planet_id) references planet(planet_id));
+ERROR:  syntax error at or near ","
+LINE 1: ..., has_oxygen boolean, has_water boolean, planet_id, constrai...
+                                                             ^
+universe=# create table moon(moon_id serial primary key, name varchar(30) not null, has_oxygen boolean, has_water boolean, planet_id int, constraint fl_planet foreign key(planet_id) references planet(planet_id));
+CREATE TABLE
+universe=# \d moon
+                                        Table "public.moon"
+   Column   |         Type          | Collation | Nullable |                Default
+------------+-----------------------+-----------+----------+---------------------------------------
+ moon_id    | integer               |           | not null | nextval('moon_moon_id_seq'::regclass)
+ name       | character varying(30) |           | not null |
+ has_oxygen | boolean               |           |          |
+ has_water  | boolean               |           |          |
+ planet_id  | integer               |           |          |
+Indexes:
+    "moon_pkey" PRIMARY KEY, btree (moon_id)
+Foreign-key constraints:
+    "fl_planet" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+
+
+universe=# create table blackhole(blackhole_id serial primary key not null, name varchar(30), gravity int, galaxy_id int);
+CREATE TABLE
+universe=# \d
+                     List of relations
+ Schema |            Name            |   Type   |  Owner
+--------+----------------------------+----------+----------
+ public | blackhole                  | table    | postgres
+ public | blackhole_blackhole_id_seq | sequence | postgres
+ public | galaxy                     | table    | postgres
+ public | galaxy_galaxy_id_seq       | sequence | postgres
+ public | moon                       | table    | postgres
+ public | moon_moon_id_seq           | sequence | postgres
+ public | planet                     | table    | postgres
+ public | planet_planet_id_seq       | sequence | postgres
+ public | star                       | table    | postgres
+ public | start_star_id_seq          | sequence | postgres
+(10 rows)
+
+
+universe=# \d galaxy
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ size_tons   | integer               |           |          |
+ description | text                  |           |          |
+ populated   | boolean               |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+Referenced by:
+    TABLE "star" CONSTRAINT "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# insert into galaxy(name, size_tons, description, populated)
+universe-# values
+universe-# ('Milky Way', 100000, 'Milky Way if the galaxy that includes the Solar System', true),
+universe-# ('Lmc', 14000, 'The Large Magellanic Cloud is a satelite galaxy of the Milky Way', true),
+universe-# ('Andromeda', 220000, 'Is the nearest major galaxy to the Milky Way', false),
+universe-# ('Cigar Galaxy', 37000, 'Is a starburst galaxy approximately 12 million light-years away in the constellation Urse Major', false),
+universe-# ('Pinwheel Galaxy', 170000, 'The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major' false);
+ERROR:  syntax error at or near "false"
+LINE 7: ...ars away from Earth in the constellation Ursa Major' false);
+                                                                ^
+universe=# insert into galaxy(name, size_tons, description, populated)
+universe-# values
+universe-# ('Milky Way', 100000, 'Milky Way if the galaxy that includes the Solar System', true),
+universe-# ('Lmc', 14000, 'The Large Magellanic Cloud is a satelite galaxy of the Milky Way', true),
+universe-# ('Andromeda', 220000, 'Is the nearest major galaxy to the Milky Way', false),
+universe-# ('Pinwheel Galaxy', 170000, 'The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major', false),
+universe-# ('Cigar', 37000, 'Is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major', false);
+INSERT 0 5
+universe=# \d galaxy
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ size_tons   | integer               |           |          |
+ description | text                  |           |          |
+ populated   | boolean               |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+Referenced by:
+    TABLE "star" CONSTRAINT "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# select* from galaxy;
+ galaxy_id |      name       | size_tons |                                                      description
+                 | populated
+-----------+-----------------+-----------+-----------------------------------------------------------------------------------------------------------------------+-----------
+         1 | Milky Way       |    100000 | Milky Way if the galaxy that includes the Solar System
+                 | t
+         2 | Lmc             |     14000 | The Large Magellanic Cloud is a satelite galaxy of the Milky Way
+                 | t
+         3 | Andromeda       |    220000 | Is the nearest major galaxy to the Milky Way
+                 | f
+         4                        170000 | The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major | f
+         5 | Cigar           |     37000 | Is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major                       | f
+(5 rows)   select* from galaxy;
+           select* from galaxy;
+ galaxy_id |      name       | size_tons |                                                      description                                                      | populated
+-----------+-----------------+-----------+-----------------------------------------------------------------------------------------------------------------------+-----------
+         1 | Milky Way       |    100000 | Milky Way if the galaxy that includes the Solar System                                                                | t
+         2 | Lmc             |     14000 | The Large Magellanic Cloud is a satelite galaxy of the Milky Way                                                      | t
+         3 | Andromeda       |    220000 | Is the nearest major galaxy to the Milky Way                                                                          | f
+         4 | Pinwheel Galaxy |    170000 | The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major | f
+         5 | Cigar           |     37000 | Is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major                       | f
+(5 rows)
+
+
+universe=# select* from galaxy;
+ galaxy_id |      name       | size_tons |                                                      description                                                      | populated
+-----------+-----------------+-----------+-----------------------------------------------------------------------------------------------------------------------+-----------
+         1 | Milky Way       |    100000 | Milky Way if the galaxy that includes the Solar System                                                                | t
+         2 | Lmc             |     14000 | The Large Magellanic Cloud is a satelite galaxy of the Milky Way                                                      | t
+         3 | Andromeda       |    220000 | Is the nearest major galaxy to the Milky Way                                                                          | f
+         4 | Pinwheel Galaxy |    170000 | The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major | f
+         5   Cigar           |     37000 | Is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major                       | f
+universe=#
+universe=#
+universe=#
+universe=#
+universe=# select* from  galaxy;
+ galaxy_id |      name       | size_tons |                                                      description                                                      | populated
+-----------+-----------------+-----------+-----------------------------------------------------------------------------------------------------------------------+-----------
+         1 | Milky Way       |    100000 | Milky Way if the galaxy that includes the Solar System                                                                | t
+         2 | Lmc             |     14000 | The Large Magellanic Cloud is a satelite galaxy of the Milky Way                                                      | t
+         3 | Andromeda       |    220000 | Is the nearest major galaxy to the Milky Way                                                                          | f
+         4 | Pinwheel Galaxy |    170000 | The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major | f
+         5 | Cigar           |     37000 | Is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major                       | f
+(5 rows)
+
+
+universe=# \d galaxy
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ size_tons   | integer               |           |          |
+ description | text                  |           |          |
+ populated   | boolean               |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+Referenced by:
+    TABLE "star" CONSTRAINT "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# insert into galaxy
+universe-# (name, size_tones, description, populated)
+universe-# values
+universe-# (
+universe(#
+universe(#
+universe(# 'Whirlpool', 60000, 'The galaxy also known as Messier 51a or NGC 5194, is an interacting...', false);
+ERROR:  column "size_tones" of relation "galaxy" does not exist
+LINE 2: (name, size_tones, description, populated)
+               ^
+universe=# insert into galaxy
+universe-# (name, size_tons, description, populated)
+universe-# values
+universe-# 'Whirlpool', 60000, 'The galaxy also known as Messier 51a or NGC 5194, is an interacting...', false);
+ERROR:  syntax error at or near "'Whirlpool'"
+LINE 4: 'Whirlpool', 60000, 'The galaxy also known as Messier 51a or...
+        ^
+universe=# insert into galaxy
+universe-# (name, size_tones, description, populated)
+universe-# values
+universe-# ('Whirlpool', 60000, 'The galaxy also known as Messier 51a or NGC 5194, is an interacting...', false);
+ERROR:  column "size_tones" of relation "galaxy" does not exist
+LINE 2: (name, size_tones, description, populated)
+               ^
+universe=# insert into galaxy
+universe-# (name, size_tons, description, populated)
+universe-# values
+universe-# ('Whirlpool', 60000, 'The galaxy also known as Messier 51a or NGC 5194 is an interacting...', false);
+INSERT 0 1
+universe=# \d galaxy
+                                         Table "public.galaxy"
+   Column    |         Type          | Collation | Nullable |                  Default
+-------------+-----------------------+-----------+----------+-------------------------------------------
+ galaxy_id   | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass)
+ name        | character varying(30) |           |          |
+ size_tons   | integer               |           |          |
+ description | text                  |           |          |
+ populated   | boolean               |           |          |
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+Referenced by:
+    TABLE "star" CONSTRAINT "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+
+universe=# select * from galaxy
+universe-# ;
+ galaxy_id |      name       | size_tons |                                                      description
+                                           | populated
+-----------+-----------------+-----------+-----------------------------------------------------------------------------------------------------------------------+-----------
+         1 | Milky Way       |    100000 | Milky Way if the galaxy that includes the Solar System
+                                           | t
+         2 | Lmc             |     14000 | The Large Magellanic Cloud is a satelite galaxy of the Milky Way
+                                           | t
+         3 | Andromeda       |    220000 | Is the nearest major galaxy to the Milky Way
+                                           | f
+         4 | Pinwheel Galaxy |    170000 | The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major | f
+         5 | Cigar           |     37000 | Is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major                       | f
+         6 | Whirlpool       |     60000 | The galaxy also known as Messier 51a or NGC 5194 is an interacting...                                                 | f
+(6 rows)
+
+
+universe=# \star
+invalid command \star
+Try \? for help.
+universe=# \d star
+                                         Table "public.star"
+   Column    |         Type          | Collation | Nullable |                Default
+-------------+-----------------------+-----------+----------+----------------------------------------
+ star_id     | integer               |           | not null | nextval('start_star_id_seq'::regclass)
+ name        | character varying(30) |           | not null |
+ radius      | integer               |           |          |
+ description | text                  |           |          |
+ color       | character varying(30) |           |          |
+ has_oxygen  | boolean               |           |          |
+ galaxy_id   | integer               |           |          |
+Indexes:
+    "start_pkey" PRIMARY KEY, btree (star_id)
+Foreign-key constraints:
+    "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+Referenced by:
+    TABLE "planet" CONSTRAINT "fk_star" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+
+universe=# alter table star drop column description;
+ALTER TABLE
+universe=# \star
+invalid command \star
+Try \? for help.
+universe=# \d star
+                                        Table "public.star"
+   Column   |         Type          | Collation | Nullable |                Default
+------------+-----------------------+-----------+----------+----------------------------------------
+ star_id    | integer               |           | not null | nextval('start_star_id_seq'::regclass)
+ name       | character varying(30) |           | not null |
+ radius     | integer               |           |          |
+ color      | character varying(30) |           |          |
+ has_oxygen | boolean               |           |          |
+ galaxy_id  | integer               |           |          |
+Indexes:
+    "start_pkey" PRIMARY KEY, btree (star_id)
+Foreign-key constraints:
+    "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+Referenced by:
+    TABLE "planet" CONSTRAINT "fk_star" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+
+universe=# insert into star (name, radius, color, has_oxygen, galaxy_id) values
+universe-# ('Scuti', 12000, 'Orange', false, 1);
+INSERT 0 1
+universe=# insert into star (name, radius, color, has_oxygen, galaxy_id) values
+universe-# ('Canis Majoris', 11500, 'Orange', false, 1);
+INSERT 0 1
+universe=# insert into start (name, radius, color, has_oxygen, galaxy_id) values
+universe-# ('Kentaurus', 25000, 'Magenta', false, 2);
+ERROR:  relation "start" does not exist
+LINE 1: insert into start (name, radius, color, has_oxygen, galaxy_i...
+                    ^
+universe=# insert into star (name, radius, color, has_oxygen, galaxy_id) values
+universe-# ('Kentaurus', 25000, 'Magenta', false, 2);
+INSERT 0 1
+universe=# insert into star (name, radius, color, gas_oxygen, galaxy_id) values
+universe-# ('Filftitaps', 25533, 'Green', false, 3);
+ERROR:  column "gas_oxygen" of relation "star" does not exist
+LINE 1: insert into star (name, radius, color, gas_oxygen, galaxy_id...
+                                               ^
+universe=# insert into star (name, radius, color, has_oxygen, galaxy_id) values
+universe-# ('Filftitaps', 25533, 'Green', false, 3);
+INSERT 0 1
+universe=# insert into star (name, radius, color, gas_oxygen, galaxy_id) values
+universe-# ('Kekentom', 15000, 'Green', false, 3);
+ERROR:  column "gas_oxygen" of relation "star" does not exist
+LINE 1: insert into star (name, radius, color, gas_oxygen, galaxy_id...
+                                               ^
+universe=# insert into star (name, radius, color, has_oxygen, galaxy_id) values
+universe-# ('Kekentom', 15000, 'Green', false, 3);
+INSERT 0 1
+universe=# \d star
+                                        Table "public.star"
+   Column   |         Type          | Collation | Nullable |                Default
+------------+-----------------------+-----------+----------+----------------------------------------
+ star_id    | integer               |           | not null | nextval('start_star_id_seq'::regclass)
+ name       | character varying(30) |           | not null |
+ radius     | integer               |           |          |
+ color      | character varying(30) |           |          |
+ has_oxygen | boolean               |           |          |
+ galaxy_id  | integer               |           |          |
+Indexes:
+    "start_pkey" PRIMARY KEY, btree (star_id)
+Foreign-key constraints:
+    "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+Referenced by:
+    TABLE "planet" CONSTRAINT "fk_star" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+
+universe=# select* from star;
+ star_id |     name      | radius |  color  | has_oxygen | galaxy_id
+---------+---------------+--------+---------+------------+-----------
+       1 | Scuti         |  12000 | Orange  | f          |         1
+       2 | Canis Majoris |  11500 | Orange  | f          |         1
+       3 | Kentaurus     |  25000 | Magenta | f          |         2
+       4 | Filftitaps    |  25533 | Green   | f          |         3
+       5 | Kekentom      |  15000 | Green   | f          |         3
+(5 rows)
+
+
+universe=# insert into star(name, radius, color, has_oxygen, galaxy_id) values('Sun', 5000, 'Yellow', false, 1);
+INSERT 0 1
+universe=# \d star
+                                        Table "public.star"
+   Column   |         Type          | Collation | Nullable |                Default
+------------+-----------------------+-----------+----------+----------------------------------------
+ star_id    | integer               |           | not null | nextval('start_star_id_seq'::regclass)
+ name       | character varying(30) |           | not null |
+ radius     | integer               |           |          |
+ color      | character varying(30) |           |          |
+ has_oxygen | boolean               |           |          |
+ galaxy_id  | integer               |           |          |
+Indexes:
+    "start_pkey" PRIMARY KEY, btree (star_id)
+Foreign-key constraints:
+    "fk_galaxy" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+Referenced by:
+    TABLE "planet" CONSTRAINT "fk_star" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+
+universe=# select * from star
+universe-# ;
+ star_id |     name      | radius |  color  | has_oxygen | galaxy_id
+---------+---------------+--------+---------+------------+-----------
+       1 | Scuti         |  12000 | Orange  | f          |         1
+       2 | Canis Majoris |  11500 | Orange  | f          |         1
+       3 | Kentaurus     |  25000 | Magenta | f          |         2
+       4 | Filftitaps    |  25533 | Green   | f          |         3
+       5 | Kekentom      |  15000 | Green   | f          |         3
+       6 | Sun           |   5000 | Yellow  | f          |         1
+(6 rows)
+
+
+universe=# \d planet
+                                            Table "public.planet"
+      Column      |         Type          | Collation | Nullable |                  Default
+------------------+-----------------------+-----------+----------+-------------------------------------------
+ planet_id        | integer               |           | not null | nextval('planet_planet_id_seq'::regclass)
+ name             | character varying(30) |           | not null |
+ amount_of_people | numeric               |           |          |
+ time_travel      | boolean               |           |          | false
+ star_id          | integer               |           |          |
+Indexes:
+    "planet_pkey" PRIMARY KEY, btree (planet_id)
+Foreign-key constraints:
+    "fk_star" FOREIGN KEY (star_id) REFERENCES star(star_id)
+Referenced by:
+    TABLE "moon" CONSTRAINT "fl_planet" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+
+
+universe=# \d
+                     List of relations
+ Schema |            Name            |   Type   |  Owner
+--------+----------------------------+----------+----------
+ public | blackhole                  | table    | postgres
+ public | blackhole_blackhole_id_seq | sequence | postgres
+ public | galaxy                     | table    | postgres
+ public | galaxy_galaxy_id_seq       | sequence | postgres
+ public | moon                       | table    | postgres
+ public | moon_moon_id_seq           | sequence | postgres
+ public | planet                     | table    | postgres
+ public | planet_planet_id_seq       | sequence | postgres
+ public | star                       | table    | postgres
+ public | start_star_id_seq          | sequence | postgres
+(10 rows)
+
+
+universe=# \d planet
+                                            Table "public.planet"
+      Column      |         Type          | Collation | Nullable |                  Default
+------------------+-----------------------+-----------+----------+-------------------------------------------
+ planet_id        | integer               |           | not null | nextval('planet_planet_id_seq'::regclass)
+ name             | character varying(30) |           | not null |
+ amount_of_people | numeric               |           |          |
+ time_travel      | boolean               |           |          | false
+ star_id          | integer               |           |          |
+Indexes:
+    "planet_pkey" PRIMARY KEY, btree (planet_id)
+Foreign-key constraints:
+    "fk_star" FOREIGN KEY (star_id) REFERENCES star(star_id)
+Referenced by:
+    TABLE "moon" CONSTRAINT "fl_planet" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+
+
+universe=# select * from star;
+ star_id |     name      | radius |  color  | has_oxygen | galaxy_id
+---------+---------------+--------+---------+------------+-----------
+       1 | Scuti         |  12000 | Orange  | f          |         1
+       2 | Canis Majoris |  11500 | Orange  | f          |         1
+       3 | Kentaurus     |  25000 | Magenta | f          |         2
+       4 | Filftitaps    |  25533 | Green   | f          |         3
+       5 | Kekentom      |  15000 | Green   | f          |         3
+       6 | Sun           |   5000 | Yellow  | f          |         1
+(6 rows)
+
+
+universe=# insert into planet(name, amount_of_people, star_id)
+universe-# values
+universe-# ('Earth', 70000000, 6);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, start_id) values(
+universe(# 'Mars', 50000, 6);
+ERROR:  column "start_id" of relation "planet" does not exist
+LINE 1: insert into planet(name, amount_of_people, start_id) values(
+                                                   ^
+universe=# insert into planet(name, amount_of_people, star_id) values
+universe-# ('Mars', 50000, 6);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Santa', 0, 3);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Gindu', 100000, 2);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Begen', 300000, 2);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Talma', 3000, 4);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Neptun', 3000, 6);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Semptum', 66000, 2);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Gonji', 0, 5);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Folji', 0, 5);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Solji', 0, 5);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Fantarius', 2000, 2);
+INSERT 0 1
+universe=# insert into planet(name, amount_of_people, star_id) values ('Zezelpen', 55000, 3);
+INSERT 0 1
+universe=# select * from planet;
+ planet_id |   name    | amount_of_people | time_travel | star_id
+-----------+-----------+------------------+-------------+---------
+         1 | Earth     |         70000000 | f           |       6
+         2 | Mars      |            50000 | f           |       6
+         3 | Santa     |                0 | f           |       3
+         4 | Gindu     |           100000 | f           |       2
+         5 | Begen     |           300000 | f           |       2
+         6 | Talma     |             3000 | f           |       4
+         7 | Neptun    |             3000 | f           |       6
+         8 | Semptum   |            66000 | f           |       2
+         9 | Gonji     |                0 | f           |       5
+        10 | Folji     |                0 | f           |       5
+        11 | Solji     |                0 | f           |       5
+        12 | Fantarius |             2000 | f           |       2
+        13 | Zezelpen  |            55000 | f           |       3
+(13 rows)
+
+
+universe=# \d moon
+                                        Table "public.moon"
+   Column   |         Type          | Collation | Nullable |                Default
+------------+-----------------------+-----------+----------+---------------------------------------
+ moon_id    | integer               |           | not null | nextval('moon_moon_id_seq'::regclass)
+ name       | character varying(30) |           | not null |
+ has_oxygen | boolean               |           |          |
+ has_water  | boolean               |           |          |
+ planet_id  | integer               |           |          |
+Indexes:
+    "moon_pkey" PRIMARY KEY, btree (moon_id)
+Foreign-key constraints:
+    "fl_planet" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+
+
+universe=# select * from planet;
+ planet_id |   name    | amount_of_people | time_travel | star_id
+-----------+-----------+------------------+-------------+---------
+         1 | Earth     |         70000000 | f           |       6
+         2 | Mars      |            50000 | f           |       6
+         3 | Santa     |                0 | f           |       3
+         4 | Gindu     |           100000 | f           |       2
+         5 | Begen     |           300000 | f           |       2
+         6 | Talma     |             3000 | f           |       4
+         7 | Neptun    |             3000 | f           |       6
+         8 | Semptum   |            66000 | f           |       2
+         9 | Gonji     |                0 | f           |       5
+        10 | Folji     |                0 | f           |       5
+        11 | Solji     |                0 | f           |       5
+        12 | Fantarius |             2000 | f           |       2
+        13 | Zezelpen  |            55000 | f           |       3
+(13 rows)
+
+
+universe=# \d moon
+                                        Table "public.moon"
+   Column   |         Type          | Collation | Nullable |                Default
+------------+-----------------------+-----------+----------+---------------------------------------
+ moon_id    | integer               |           | not null | nextval('moon_moon_id_seq'::regclass)
+ name       | character varying(30) |           | not null |
+ has_oxygen | boolean               |           |          |
+ has_water  | boolean               |           |          |
+ planet_id  | integer               |           |          |
+Indexes:
+    "moon_pkey" PRIMARY KEY, btree (moon_id)
+Foreign-key constraints:
+    "fl_planet" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+
+
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) vaues('Luna', false, false, 1);
+ERROR:  syntax error at or near "vaues"
+LINE 1: ...into moon(name, has_oxygen, has_water, planet_id) vaues('Lun...
+                                                             ^
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Luna', false, false, 1);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Dula', true, false, 2);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Fula', true, true, 3);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Sula', true, true, 4);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', true, true, 5);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Jula', true, true, 6);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 8);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 9);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 20);
+ERROR:  insert or update on table "moon" violates foreign key constraint "fl_planet"
+DETAIL:  Key (planet_id)=(20) is not present in table "planet".
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 7);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 10);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 11);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 12);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 5);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 6);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 7);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 8);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 9);
+INSERT 0 1
+universe=# insert into moon(name, has_oxygen, has_water, planet_id) values('Rula', false, true, 10);
+INSERT 0 1
+universe=# select * from moon;
+ moon_id | name | has_oxygen | has_water | planet_id
+---------+------+------------+-----------+-----------
+       1 | Luna | f          | f         |         1
+       2 | Dula | t          | f         |         2
+       3 | Fula | t          | t         |         3
+       4 | Sula | t          | t         |         4
+       5 | Rula | t          | t         |         5
+       6 | Jula | t          | t         |         6
+       7 | Rula | f          | t         |         8
+       8 | Rula | f          | t         |         9
+      10 | Rula | f          | t         |         7
+      11 | Rula | f          | t         |        10
+      12 | Rula | f          | t         |        11
+      13 | Rula | f          | t         |        12
+      14 | Rula | f          | t         |         5
+      15 | Rula | f          | t         |         6
+      16 | Rula | f          | t         |         7
+      17 | Rula | f          | t         |         8
+      18 | Rula | f          | t         |         9
+      19 | Rula | f          | t         |        10
+(18 rows)
+
+
+universe=# \d
+                     List of relations
+ Schema |            Name            |   Type   |  Owner
+--------+----------------------------+----------+----------
+ public | blackhole                  | table    | postgres
+ public | blackhole_blackhole_id_seq | sequence | postgres
+ public | galaxy                     | table    | postgres
+ public | galaxy_galaxy_id_seq       | sequence | postgres
+ public | moon                       | table    | postgres
+ public | moon_moon_id_seq           | sequence | postgres
+ public | planet                     | table    | postgres
+ public | planet_planet_id_seq       | sequence | postgres
+ public | star                       | table    | postgres
+ public | start_star_id_seq          | sequence | postgres
+(10 rows)
+
+
+universe=# select* from blackhole;
+ blackhole_id | name | gravity | galaxy_id
+--------------+------+---------+-----------
+(0 rows)
+
+
+universe=# select* from galaxy;
+ galaxy_id |      name       | size_tons |                                                      description
+                                           | populated
+-----------+-----------------+-----------+-----------------------------------------------------------------------------------------------------------------------+-----------
+         1 | Milky Way       |    100000 | Milky Way if the galaxy that includes the Solar System
+                                           | t
+         2 | Lmc             |     14000 | The Large Magellanic Cloud is a satelite galaxy of the Milky Way
+                                           | t
+         3 | Andromeda       |    220000 | Is the nearest major galaxy to the Milky Way
+                                           | f
+         4 | Pinwheel Galaxy |    170000 | The Pinwheel Galaxy is a face-on spiral galaxy 21 million light-years away from Earth in the constellation Ursa Major | f
+         5 | Cigar           |     37000 | Is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major                       | f
+         6 | Whirlpool       |     60000 | The galaxy also known as Messier 51a or NGC 5194 is an interacting...                                                 | f
+(6 rows)
+
+
+universe=# select* from moon;
+ moon_id | name | has_oxygen | has_water | planet_id
+---------+------+------------+-----------+-----------
+       1 | Luna | f          | f         |         1
+       2 | Dula | t          | f         |         2
+       3 | Fula | t          | t         |         3
+       4 | Sula | t          | t         |         4
+       5 | Rula | t          | t         |         5
+       6 | Jula | t          | t         |         6
+       7 | Rula | f          | t         |         8
+       8 | Rula | f          | t         |         9
+      10 | Rula | f          | t         |         7
+      11 | Rula | f          | t         |        10
+      12 | Rula | f          | t         |        11
+      13 | Rula | f          | t         |        12
+      14 | Rula | f          | t         |         5
+      15 | Rula | f          | t         |         6
+      16 | Rula | f          | t         |         7
+      17 | Rula | f          | t         |         8
+      18 | Rula | f          | t         |         9
+      19 | Rula | f          | t         |        10
+(18 rows)
+
+
+universe=# select* from planet;
+ planet_id |   name    | amount_of_people | time_travel | star_id
+-----------+-----------+------------------+-------------+---------
+         1 | Earth     |         70000000 | f           |       6
+         2 | Mars      |            50000 | f           |       6
+         3 | Santa     |                0 | f           |       3
+         4 | Gindu     |           100000 | f           |       2
+         5 | Begen     |           300000 | f           |       2
+         6 | Talma     |             3000 | f           |       4
+         7 | Neptun    |             3000 | f           |       6
+         8 | Semptum   |            66000 | f           |       2
+         9 | Gonji     |                0 | f           |       5
+        10 | Folji     |                0 | f           |       5
+        11 | Solji     |                0 | f           |       5
+        12 | Fantarius |             2000 | f           |       2
+        13 | Zezelpen  |            55000 | f           |       3
+(13 rows)
+
+
+universe=# select* from star;
+ star_id |     name      | radius |  color  | has_oxygen | galaxy_id
+---------+---------------+--------+---------+------------+-----------
+       1 | Scuti         |  12000 | Orange  | f          |         1
+       2 | Canis Majoris |  11500 | Orange  | f          |         1
+       3 | Kentaurus     |  25000 | Magenta | f          |         2
+       4 | Filftitaps    |  25533 | Green   | f          |         3
+       5 | Kekentom      |  15000 | Green   | f          |         3
+       6 | Sun           |   5000 | Yellow  | f          |         1
+(6 rows)
+
+
+universe=#
