@@ -1,0 +1,32 @@
+Commands
+cd <name of the directory>
+cd ..    go back
+ls       list items of the dorectory
+ls --help    list all of the possible commands
+li -all      list all files include hidden folders
+ls -l        see list of file premissions;
+
+chmod +x file_name.sh 		to give everyone executable permissions;
+
+touch <nameof the file>   create a new file
+mkdir <nameof the folder> create a new folder
+mkdir <exitsting folder>/<name of a new folder>   You can amake a folder in that client folder from here by adding it to the path like this
+
+mv <nameof the file> <new name of the file>   to rename a file
+cp <name of the file>  <name of the folder to copy to >  copy file to the place
+rm <name of the file>  delete this file
+clear 			clear the console.
+find 			to see a tree of the folder
+find --help  		to see a list of find commands
+find -name <name of the file>	find location of the specific file
+man <command>		Find available commans as well (man stands for manual);
+
+rmdir <directory name>  	delete the folder
+echo text >> filename 			Prints to file instead of the terminal
+
+sh file_name.sh				you can run script   sh stands for shell;
+bash file_name.sh			you can run script   bash stands for bourne-again shell;
+
+which bash 				Find where the bash interpreter is located;
+
+echo -e "\n" 		new line;
