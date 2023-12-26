@@ -24,6 +24,11 @@ find --help  		to see a list of find commands
 find -name <name of the file>	find location of the specific file
 man <command>		Find available commans as well (man stands for manual);
 help 			help 
+help let
+help function
+help until
+printenv    		prints enviromental shell variablese
+declare -p      	View all variables in the shell (p stands for print) 
 
 rmdir <directory name>  	delete the folder
 echo text >> filename 			Prints to file instead of the terminal
@@ -83,3 +88,13 @@ then
 else 
     echo Include a postive integer as the first argument
 fi
+
+
+ARR=("a" "b" "c")		create an array
+$ echo ${ARR[1]} 		print second value in the array
+echo  ${ARR[@]}			print all variables of the array
+
+=~ 	allows pattern matching; [[ hello =~ lo ]] 	checks if hello consists of lo
+^h 	checks if word start with letter h  [[ hello =~ ^h ]] 
+^h.+d$ 		check is string starts with an h, has at least one character after it and ends with d
+\?$   		check if your variable ends with ?
