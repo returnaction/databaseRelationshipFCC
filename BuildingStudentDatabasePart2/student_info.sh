@@ -30,7 +30,7 @@ echo "$($PSQL "SELECT ROUND(AVG(gpa), 2) FROM students")"
 echo -e "\nMajor Id, total number of students in a column named 'number_of_students', and average GPA rounded to two decimal places in a column name 'average_gpa', for each major ID in the students table having a student count greater then 1:"
 echo "$($PSQL "SELECT major_id, COUNT(*) AS number_of_students,  ROUND(AVG(gpa), 2) AS average_gpa  FROM students GROUP BY major_id HAVING COUNT(*)> 1")"
 
-echo -e "\nList of majors, in alphabetical order, that either no student is taking or has a studnt whose first name contains a case insensetive 'ma'"
+echo -e "\nList of majors, in alphabetical order, that either no student is taking or has a studnt whose first nshame contains a case insensetive 'ma'"
 echo "$($PSQL "SELECT major FROM students FULL JOIN majors ON majors.major_id = students.major_id WHERE major IS NOT NULL AND (student_id IS NULL OR first_name ILIKE '%ma%') ORDER BY major")"
 
 echo -e "\nList of unique courses, in reverse alphabetical order, that no student or 'Obie Hilpert' is taking"
@@ -41,8 +41,9 @@ echo "$($PSQL "SELECT COUNT(course), COURSE FROM students INNER JOIN majors USIN
  
 
 
-
-
+#%APPDATA%\postgresql\pgpass.conf
+#hostname:port:database:username:password
+#psql -U myuser -d mydatabase
 
 
 
